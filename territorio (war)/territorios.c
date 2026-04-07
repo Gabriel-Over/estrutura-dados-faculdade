@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 #include "territorios.h"
 
 Territorio *criarTerritorio (int *quantidade) {
@@ -9,7 +8,7 @@ Territorio *criarTerritorio (int *quantidade) {
 	//Inicio do programa propriamente dito
 	printf("---------------- Criacao de territorios ----------------\n");
 	//Repete o "formulario" até o ultimo item do vetor
-	printf("Quantos territorios voce deseja criar (no mínimo 3)? ");
+	printf("Quantos territorios voce deseja criar? (no minimo 3): ");
 	scanf("%d", quantidade);
 	//Limpa o buffer
 	getchar();
@@ -24,7 +23,8 @@ Territorio *criarTerritorio (int *quantidade) {
 	    printf("Erro na alocacao de memória\n");
 	    exit(1);
 	}
-	
+    
+	printf("------------------------------------------------------\n");
 	for (i = 0; i < *quantidade; i++) {
 		//Preenchimento do "formulario"
 		printf("%dº Territorio\n", i+1);
