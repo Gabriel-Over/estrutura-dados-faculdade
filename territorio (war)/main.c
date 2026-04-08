@@ -5,11 +5,9 @@
 #include <string.h>
 #include "territorios.h"
 
-//Codigo incompleto, falta MUITA coisa
-
 //Struct contendo os dados do territorio
 int main () {
-	//Permite o console imprimir caracteres da l�ngua portuguesa, desnecess�rio pro funcionamento mas deixa mais bonito
+	//Inicia a seed para numeros aleatorios
 	srand(time(NULL));
 	
 	//Variaveis
@@ -25,8 +23,10 @@ int main () {
         "Conquistar 18 territorios"
     };
     int totalMissoes = 5;
+    int vitoriasJogador = 0;
+    int derrotasJogador = 0;
 	
-	//Cria��o de territorios, caso n�o consiga criar, ele continua no loop
+	//Criacao de territorios, caso nao consiga criar, ele continua no loop
 	do {
 	    territorios = criarTerritorio(&quantidade);
 	} while (territorios == NULL);
@@ -43,7 +43,7 @@ int main () {
 	bool rodando = true;
 	int atacante, defensor;
 	
-	// Atribuindo miss�o ao "Jogador 1" (dono do primeiro territ�rio criado)
+	// Atribuindo missao ao "Jogador 1" (dono do primeiro territorio criado)
     atribuirMissao(&territorios[0].missao, poolMissoes, totalMissoes);
     printf("\nSua Missao (1º territorio): %s\n", territorios[0].missao);
 	
@@ -57,16 +57,22 @@ int main () {
         if (atacante > 0 && atacante <= quantidade && defensor > 0 && defensor <= quantidade) {
             // Realiza o ataque
             // atacarTerritorio(&territorios[atacante-1], &territorios[defensor-1]);
+            int resultado = atacarTerritorio(&territorios[atacante-1], &territorios[defensor-1]);
+
+            if (atacante - 1 == 0) { // Se quem atacou foi o jogador da missão
+                if (resultado == 1) vitoriasJogador++;
+                else if (resultado == 0) derrotasJogador++;
+            }
             
-            // Verifica��o Condicional de Vit�ria
-            if (verificarMissao(territorios[0].missao, territorios, quantidade, territorios[0].cor)) {
+            // Verificacao Condicional de Vitoria
+            if (verificarMissao(territorios[0].missao, territorios, quantidade, territorios[0].cor, vitoriasJogador, derrotasJogador)) {
                 printf("\n====================================\n");
                 printf("PARABENS! A missao [%s] foi cumprida!\n", territorios[0].missao);
                 printf("====================================\n");
                 rodando = false;
             } else {
                 printf("\nMissao ainda nao cumprida. Proximo turno...\n");
-                // Para testes, vamos sair ap�s o primeiro turno se n�o quiser loop infinito
+                // Para testes, vamos sair apos o primeiro turno se nao quiser loop infinito
                 printf("Deseja continuar? (1-Sim / 0-Sair): ");
                 int cont; scanf("%d", &cont);
                 if (cont == 0) rodando = false;
@@ -74,7 +80,7 @@ int main () {
         }
 	}
 	
-	// Libera��o de mem�ria
+	// Liberacao de memoria
     for(int i = 0; i < quantidade; i++) {
         if(territorios[i].missao != NULL) free(territorios[i].missao);
     }

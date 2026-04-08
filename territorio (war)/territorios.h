@@ -11,8 +11,8 @@ typedef struct terr {
 
 //Protótipos
 Territorio *criarTerritorio (int *quantidade);
-void atacarTerritorio (Territorio *atacante, Territorio *defensor);
+int atacarTerritorio (Territorio *atacante, Territorio *defensor);
 void atribuirMissao(char **destino, char *missoes[], int totalMissoes);
-int verificarMissao(char* missao, Territorio* mapa, int tamanho, char* corJogador);
+int verificarMissao(char* missao, Territorio* mapa, int tamanho, char* corJogador, int derrotas, int conquistas);
 
 #endif

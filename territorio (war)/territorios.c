@@ -78,11 +78,11 @@ Territorio *criarTerritorio (int *quantidade) {
 	return t;
 }
 
-void atacarTerritorio (Territorio *atacante, Territorio *defensor) {
+int atacarTerritorio (Territorio *atacante, Territorio *defensor) {
     //Se a cor do atacante e defensor forem a mesma, então não pode atacar
     if (strcmp(atacante->cor, defensor->cor) == 0) {
         printf("Nao pode atacar territorio da mesma cor!\n");
-        return;
+        return -1;
     }    
     
     int dadoAtacante = (rand() % 6) + 1;
@@ -104,21 +104,14 @@ void atacarTerritorio (Territorio *atacante, Territorio *defensor) {
         strcpy(defensor->cor, atacante->cor);
         
         printf("Novas tropas - Atacante: %d | Defensor (conquistado): %d\n", atacante->tropas, defensor->tropas);
+        return 1; // Vitoria
     } else {
         printf("DERROTA! O atacante perdeu.\n");
         atacante->tropas -= 1; // Reduz a tropa do atacante
         printf("Tropas restantes do atacante: %d\n", atacante->tropas);
+        if (atacante->tropas < 0) atacante->tropas = 0; //Garante que as tropas nao fiquem negativas
+        return 0; //Derrota
     }
-    
-    // Garante que as tropas não fiquem negativas
-    if (defensor->tropas < 0) defensor->tropas = 0;
-    if (atacante->tropas < 0) atacante->tropas = 0;
-
-    printf("---------------- Resultado da guerra ----------------\n");
-    printf("Tropas atuais -> Atacante: %d | Defensor: %d\n", atacante->tropas, defensor->tropas);
-    printf("Cor do territorio defensor: %s\n", defensor->cor);
-    printf("Cor do territorio atacante: %s\n", atacante->cor);
-    printf("-----------------------------------------\n");
 }
 
 void atribuirMissao(char **destino, char *missoes[], int totalMissoes) {
@@ -130,29 +123,39 @@ void atribuirMissao(char **destino, char *missoes[], int totalMissoes) {
     }
 }
 
-int verificarMissao(char* missao, Territorio* mapa, int tamanho, char* corJogador) {
-    // Exemplo: Missão "Conquistar 3 territorios"
-    if (strcmp(missao, "Conquistar 3 territorios") == 0) {
+int verificarMissao(char* missao, Territorio* mapa, int tamanho, char* corJogador, int derrotas, int conquistas) {
+    // 1. Conquistar X territórios
+    if (strstr(missao, "Conquistar") != NULL) {
+        int objetivo;
+        sscanf(missao, "Conquistar %d territorios", &objetivo);
+        
         int cont = 0;
         for (int i = 0; i < tamanho; i++) {
             if (strcmp(mapa[i].cor, corJogador) == 0) cont++;
         }
-        return (cont >= 3);
+        return (cont >= objetivo);
     }
     
-    // Se não houver territórios dessa cor, ele venceu
-    if (strcmp(missao, "Eliminar todas as tropas da cor vermelha") == 0) {
+    // 2. Eliminar cor vermelha
+    if (strcmp(missao, "Elimine todas as tropas da cor vermelha") == 0) {
         for (int i = 0; i < tamanho; i++) {
-            if (strcmp(mapa[i].cor, "Vermelho") == 0) {
-                return 1;
-            } 
+            // Se alguém ainda for vermelho e não for o próprio jogador
+            if (strcmp(mapa[i].cor, "Vermelho") == 0 && strcmp(corJogador, "Vermelho") != 0) {
+                return 0; // Ainda não ganhou
+            }
         }
-        printf("Nao existe um territorio vermelho, voce venceu\n");
-        return 1;
+        return 1; // Ninguém mais é vermelho!
     }
     
+    // 3. Não perder mais de X vezes (E ter pelo menos 1 território conquistado além do inicial)
     if (strcmp(missao, "Nao perder mais de 2 vezes") == 0) {
-        
+        if (derrotas > 2) return 0; // Perdeu a chance de cumprir essa missão
+        return (conquistas >= 1); // Exemplo de condição: ganhar pelo menos uma vez sem exceder derrotas
+    }
+
+    // 4. Destruir X exércitos (Conquistas totais)
+    if (strcmp(missao, "Destruir 2 exercitos") == 0) {
+        return (conquistas >= 2);
     }
     return 0; // Retorna falso por padrão
 }
