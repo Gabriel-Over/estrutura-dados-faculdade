@@ -3,6 +3,14 @@
 #include <string.h>
 #include "territorios.h"
 
+/**
+ * @brief Função que cria um array de Territorios com a quantidade desejada
+ * @param quantidade informa o tamanho do array a ser criado
+ * @return Um ponteiro para um array de Territorios
+ * @details Essa função pergunta ao usuario quantos territorios ele deseja criar e alocacao de memória para o array.
+ * Em seguida, ela pergunta ao usuario o nome e a cor de cada um dos territorialios e alocacao para o nome e a cor.
+ * Por fim, a função retorna o ponteiro para o array de Territorios.
+ */
 Territorio *criarTerritorio (int *quantidade) {
     int i;														//Variavel para iteração dos loops
 	//Inicio do programa propriamente dito
@@ -78,6 +86,12 @@ Territorio *criarTerritorio (int *quantidade) {
 	return t;
 }
 
+/**
+ * @brief Função que simula um ataque entre dois territórios
+ * @param atacante ponteiro para o território que está atacando
+ * @param defensor ponteiro para o território que está sendo atacado
+ * @return 1 se o atacante venceu, 0 se o atacante perdeu e -1 se as cores forem iguais
+ */
 int atacarTerritorio (Territorio *atacante, Territorio *defensor) {
     //Se a cor do atacante e defensor forem a mesma, então não pode atacar
     if (strcmp(atacante->cor, defensor->cor) == 0) {
@@ -114,6 +128,14 @@ int atacarTerritorio (Territorio *atacante, Territorio *defensor) {
     }
 }
 
+/**
+ * @brief Função que atribui uma missão aleatória para um jogador
+ * @details Atribui uma missão para um jogador, escolhendo aleatóriamente
+ * um item da lista de missões.
+ * @param destino ponteiro para a string que irá conter a missão
+ * @param missoes lista de strings contendo as missões
+ * @param totalMissoes tamanho da lista de missões
+ */
 void atribuirMissao(char **destino, char *missoes[], int totalMissoes) {
     int indice = rand() % totalMissoes;
     // Aloca memória para a string da missão sorteada
@@ -123,6 +145,18 @@ void atribuirMissao(char **destino, char *missoes[], int totalMissoes) {
     }
 }
 
+/**
+ * @brief Função que verifica se um jogador cumpriu uma missão
+ * @details Verifica se um jogador cumpriu uma missão, verificando se a condição
+ * da missão foi satisfeita.
+ * @param missao string contendo a missão
+ * @param mapa array de structs contendo os dados dos territórios
+ * @param tamanho tamanho do array de structs
+ * @param corJogador string contendo a cor do jogador
+ * @param derrotas número de derrotas do jogador
+ * @param conquistas número de territórios conquistados pelo jogador
+ * @return 1 se o jogador cumpriu a missão, 0 caso contrário
+ */
 int verificarMissao(char* missao, Territorio* mapa, int tamanho, char* corJogador, int derrotas, int conquistas) {
     // 1. Conquistar X territórios
     if (strstr(missao, "Conquistar") != NULL) {
