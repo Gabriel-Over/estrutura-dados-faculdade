@@ -39,7 +39,7 @@ Territorio *criarTerritorio (int *quantidade) {
 		
 		printf("Digite o nome do territorio: ");
 		fgets(t[i].nome, 30, stdin);
-		t[i].nome[strcspn(t[i].nome, "\n")] = 0; // Remove o \n do final
+		t[i].nome[strcspn(t[i].nome, "\n")] = '\0'; // Remove o \n do final
 		
 		int escolhaCor;
 	    printf("Cores possiveis -> 1-Vermelho, 2-Azul 3-Verde 4-Amarelo 5-Roxo 6-Cinza\n");
