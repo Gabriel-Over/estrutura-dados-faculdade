@@ -35,7 +35,7 @@ int main () {
                 listarItens(itens, quantidadeAtual);
                 break;
             case 3:
-                pesquisarItens(itens, quantidadeAtual);
+                pesquisarItem(itens, quantidadeAtual);
                 break;
             case 4:
                 removerItem(itens, &quantidadeAtual);
