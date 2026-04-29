@@ -1,6 +1,10 @@
 #ifndef ITENS_H
 #define ITENS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 //Struct contendo os dados do item
 typedef struct item {
     char nome[30];

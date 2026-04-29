@@ -1,6 +1,10 @@
 #ifndef TERRITORIOS_H
 #define TERRITORIOS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 //Struct contendo os dados do territorio
 typedef struct terr {
 	char nome[30];

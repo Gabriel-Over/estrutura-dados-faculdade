@@ -1,6 +1,10 @@
 #ifndef ITENS_H
 #define ITENS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 typedef struct no {
     char nome[30];
     char tipo[20];	
