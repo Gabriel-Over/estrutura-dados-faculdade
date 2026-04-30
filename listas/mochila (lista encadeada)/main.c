@@ -32,7 +32,11 @@ int main () {
                 removerItem(&cabeca);
                 break;
             case 5:
+            #ifdef _WIN32
                 system("cls");
+            #else
+                system("clear");
+            #endif
                 break;
             case 0:
                 printf("Saindo...\n");
