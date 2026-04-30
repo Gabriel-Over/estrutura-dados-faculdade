@@ -1,4 +1,4 @@
-![Status](https://img.shields.io/badge/status-em_revisão-yellow)
+![Status](https://img.shields.io/badge/status-em_andamento-yellow)
 # 📚 Projetos de Estrutura de Dados em C
 
 Aqui onde estão os meus trabalhos da disciplina de estrutura de dados.
@@ -13,37 +13,20 @@ gcc main.c itens.c -o executavel
 
 ## 📂 Organização do Repositório
 
-Cada atividade possui 3 arquivos: 
+O projeto está organizado por temas, cada tema possui algumas atividades como requeridas pelo SAVA. Cada atividade possui 3 arquivos: 
 1. O principal (`main.c`) por onde o usuário interage.
 2. O cabeçalho (arquivos que possui a extensão `.h`) possui os macros e as definições das funções que podem ser reutilizados em outros arquivos `.c`
 3. A unidade de tradução, arquivo auxiliar que contém o conteúdo das funções definidas pelo cabeçalho
 
+Esta é a estrutura das pastas:
 ```bash
-|   .gitignore
-|   README.md
-|
-+---listas                          # Tema 2 - Listas e ordenação
-|   |   README.md
-|   |
-|   +---mochila (lista encadeada)   # Versão lista encadeada
-|   |       itens.c
-|   |       itens.h
-|   |       main.c
-|   |
-|   +---mochila (vetor)             # Versão vetor
-|   |       itens.c
-|   |       itens.h
-|   |       main.c
-|   |
-|   \---priorização                 # Versão prioridades
-|           main.c
-|           prioridades.c           
-|           prioridades.h
-|
-\---territorio (war)                # Tema 1 - Estruturas
-        main.c
-        territorios.c
-        territorios.h
+estrutura-dados/
+├───Tema 1 - Estruturas de Dados Conceitos e Representação
+│   └───territorio (war)
+└───Tema 2 - Listas e Ordenação
+    ├───mochila (lista encadeada)
+    ├───mochila (vetor)
+    └───priorização
 ```
 
 ## 🚧 Status do Projeto
