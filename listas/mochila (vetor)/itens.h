@@ -14,8 +14,9 @@ typedef struct item {
 
 // Protótipos das funções
 int adicionarItem(Item *itens, int *quantidade, int capacidade);
+void listarItens(Item *itens, int quantidade);
 int removerItem(Item *itens, int *quantidade);
 int pesquisarItem(Item *itens, int quantidade);
-void listarItens(Item *itens, int quantidade);
+
 
 #endif
