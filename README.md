@@ -23,10 +23,12 @@ Esta é a estrutura das pastas:
 estrutura-dados/
 ├───Tema 1 - Estruturas de Dados Conceitos e Representação
 │   └───territorio (war)
-└───Tema 2 - Listas e Ordenação
-    ├───mochila (lista encadeada)
-    ├───mochila (vetor)
-    └───priorização
+├───Tema 2 - Listas e Ordenação
+│   ├───mochila (lista encadeada)
+│   ├───mochila (vetor)
+│   └───priorização
+└───Tema 3 - Pilhas e Filas
+    └───tetris stack
 ```
 
 ## 🚧 Status do Projeto
