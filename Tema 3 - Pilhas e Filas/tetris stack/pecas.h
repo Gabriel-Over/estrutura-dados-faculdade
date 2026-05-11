@@ -6,7 +6,7 @@
 #include <time.h>
 
 #define TIPOS_PECA "IOTL"
-#define ELEMENTOS_FILA 5
+#define CAPACIDADE_FILA 5
 #define CAPACIDADE_PILHA 3
 
 typedef struct peca{
@@ -16,7 +16,7 @@ typedef struct peca{
 
 // Struct que gerencia a fila circular
 typedef struct {
-    Peca pecas[ELEMENTOS_FILA];
+    Peca pecas[CAPACIDADE_FILA];
     int inicio;
     int fim;
     int tamanho;
@@ -42,5 +42,9 @@ Peca desempilhar(Pilha *pilha);
 
 // === VISUALIZAÇÃO ===
 void mostrarFila(FilaCircular *fila, Pilha *pilha);
+
+// === OPERAÇÕES ===
+void trocarPecaFila(FilaCircular *fila, Pilha *pilha);
+void trocaMultipla();
 
 #endif
