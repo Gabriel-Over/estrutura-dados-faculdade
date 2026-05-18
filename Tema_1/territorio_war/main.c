@@ -12,7 +12,6 @@ int main () {
 	
 	//Variaveis
 	int i;
-	int tamanho;
 	int quantidade = 0;
 	Territorio *territorios = NULL;
 	char *poolMissoes[] = {
